@@ -1,0 +1,113 @@
+set nocompatible
+set mouse=a
+set rtp +=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'ervandew/supertab'
+
+Plugin 'majutsushi/tagbar'
+
+Plugin 'kien/ctrlp.vim'
+
+Plugin 'scrooloose/nerdtree'
+
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'fatih/vim-go'
+
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+
+Plugin 'vim-scripts/indentpython.vim'
+
+Plugin 'scrooloose/syntastic'
+
+Plugin 'nvie/vim-flake8'
+
+Plugin 'cespare/vim-toml'
+
+call vundle#end()             " required
+filetype plugin indent on   " required
+
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+
+let g:jedi#completions_command = "<C-N>"
+
+let mapleader = ","
+set autoindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+map <S-j> 12j
+map <S-k> 12k
+map <C-j> gT
+map <C-k> gt
+
+set nohlsearch
+set backspace=indent,eol,start
+syntax on
+filetype plugin on
+set number
+
+set expandtab
+
+nmap <F8> :TagbarToggle<CR>
+
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+set encoding=utf-8
+
+au FileType python let python_highlight_all=1
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+
+let g:jedi#show_documentation_command = 0
+
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+set completeopt-=preview
+
+let g:SuperTabDefaultCompletionType = "context"
+
+map <C-e> :NERDTreeToggle<CR>
+
+au FileType go nmap <F5> <Plug> (go-run)
+au FileType go nmap <F6> <Plug>(go-build)
+au FileType go nmap <F7> <Plug>(go-test)
+au FileType go nmap <leader>c <Plug> (go-coverage)
+
+au FileType go nnoremap // :normal! I// <CR>
+au FileType go nnoremap \\ :normal! ^xx <CR>
+au FileType go nmap gl :GoLint<CR>
+au FileType go nmap gv :GoVet<CR>
+
+
+au FileType python nnoremap // :normal! I# <CR>
+au FileType python nnoremap \\ :normal! ^x <CR>
+
+set pastetoggle=<F2>
+set noundofile
+
+nmap gc <Plug>GitGutterRevertHunk<CR>
+nmap gn <Plug>GitGutterNextHunk<CR>
+nmap gp <Plug>GitGutterPrevHunk<CR>
